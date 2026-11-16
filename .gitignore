@@ -1,0 +1,6 @@
+# build output
+build/
+*.iso
+*.img
+*.o
+*.elf
