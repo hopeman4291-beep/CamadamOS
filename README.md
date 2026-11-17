@@ -1,6 +1,16 @@
-# CamadamOS 0.4
+# CamadamOS 0.5
 
-A hobby operating system written from scratch in C and x86 assembly. It has a graphical desktop with themes and 14 programs: Minesweeper, Solitaire, Snake, Paint, Files, Web, Music, Piano, Notepad, Calculator, Terminal, Settings, Mouse Test and About.
+A hobby operating system written from scratch in C and x86 assembly. It has a graphical desktop with themes, resizable windows, a web browser, IRC chat, real sound, USB sticks, a BASIC interpreter, chess with a computer opponent, and more games.
+
+## New in 0.5
+
+- **Chess:** full rules (castling, en passant, promotion, check, mate, stalemate, 50-move rule and repetition draws) against a computer opponent with three levels: Easy, Medium and Hard. It uses alpha-beta search, and you can undo moves or play as Black. It's in the Games folder, or type `chess` in the Terminal.
+- **BASIC:** a line-numbered BASIC like the 1980s home computers. It supports PRINT, INPUT, IF/THEN/ELSE, FOR/NEXT, WHILE/WEND, GOSUB, DATA/READ and arrays. It has graphics (PSET, LINE, CIRCLE, COLOR, LOCATE), sound (SOUND, BEEP and PLAY with music notes like "T120 O4 C D E") and INKEY$ for games. Six sample programs are in /Programs; type `HELP` inside BASIC. Double-clicking a `.bas` file opens it in BASIC.
+- **USB sticks:** plug in a FAT32 or FAT16 stick and it shows up as **USB stick** in Files. You can browse folders, open files (pictures are converted), use **Copy to PC** and **Copy to USB** (pictures are exported as .bmp), make folders and delete. Long file names work. exFAT and NTFS sticks are not supported yet, so format them as FAT32 first.
+- **Copy and paste:** Ctrl+C, Ctrl+X, Ctrl+V and Ctrl+A in Notepad (with mouse selection), the web address bar, Chat, Calculator, Terminal and BASIC.
+- **Screenshots:** press Print Screen. They're saved in /Pictures.
+- **Resizable windows:** drag the bottom-right corner, or use the green button (or double-click the title) to maximize.
+- **Saving that actually keeps everything:** saving a drawing again over the same file, downloads and screenshots are now reliably saved on an installed disk, and Paint's Save writes to the disk straight away. Saving streams to the disk, so large files no longer need a second copy in memory. Apps can now use all of the PC's memory (up to 1 GB) instead of a fixed 48 MB. Paint has a **To USB** button when a stick is plugged in.
 
 ## New in 0.4
 
@@ -10,7 +20,7 @@ A hobby operating system written from scratch in C and x86 assembly. It has a gr
 - **Saving:** an installed CamadamOS saves files and settings to the disk automatically, a couple of seconds after each change. Files then shows "Saved on disk". Use the Terminal command `save` to save at once, and `disks` to list disks.
 - New Terminal commands: `usb`, `sound`, `disks`, `save`.
 
-Not supported yet: NVMe drives, disks in RAID / Intel RST mode, USB hubs and USB storage.
+Not supported yet: NVMe drives, disks in RAID / Intel RST mode and USB hubs.
 
 ## New in 0.3
 
