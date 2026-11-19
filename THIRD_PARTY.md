@@ -5,8 +5,55 @@
 modify and redistribute under the Bitstream Vera / DejaVu license:
 https://dejavu-fonts.github.io/License.html
 
+**Interface font** - the smooth text is drawn with **Inter** by Rasmus Andersson and the Inter
+Project Authors (https://github.com/rsms/inter), licensed under the SIL Open Font License 1.1.
+The font files and the license are in `third_party/inter`; `tools/mkuifont.py` turns them into
+bitmap tables at build time.
+
+**HTTPS** - the encryption is **BearSSL** (https://bearssl.org) by Thomas Pornin, MIT license,
+in `third_party/bearssl` with its `LICENSE` file (taken from the arduino-libraries/ArduinoBearSSL
+copy; only the C sources are used). `src/tls.c`, which connects it to the CamadamOS network
+stack, was written for CamadamOS.
+
+**Trusted certificates** - `third_party/cacert/cacert.pem` is Mozilla's list of root certificate
+authorities, as packaged by certifi (https://github.com/certifi/python-certifi), under the Mozilla
+Public License 2.0 (https://mozilla.org/MPL/2.0/). It is used unmodified; `tools/mkta.py` turns it
+into C at build time.
+
 **Music** - the included melodies (Beethoven, Mozart, Grieg and traditional tunes)
 are in the public domain. "Camadam Blues" was written for CamadamOS.
 
 **Bootloader** - the bootable image is built with GNU GRUB (GPLv3), which is not
 part of this repository; it is installed from your Linux distribution at build time.
+
+**Python** - the Python app (`apps/python`) is built on **MicroPython**
+(https://micropython.org), copyright Damien P. George and contributors, released under
+the MIT license. The parts CamadamOS uses are in `third_party/micropython`, together
+with MicroPython's `LICENSE` file and `VERSION.txt`. Its maths library (`lib/libm_dbl`)
+comes from musl libc (MIT license). The IDE, the `cam` and `turtle` modules and the
+CamadamOS port were written for CamadamOS. One line of `py/frozenmod.c` is changed (marked
+"CamadamOS") so that built-in Python packages work without frozen bytecode.
+
+The `pygame` and `tkinter` modules of the Python app are work-alikes written from scratch for
+CamadamOS. They follow the public APIs of pygame (https://www.pygame.org) and of Python's
+tkinter so that programs written for them run, but they contain no code from either project.
+
+**C compiler** - the C compiler inside CamadamOS is **TinyCC** (Tiny C Compiler,
+https://repo.or.cz/tinycc.git, mirror https://github.com/TinyCC/tinycc), originally by Fabrice
+Bellard (version 0.9.28rc, commit f830a169), licensed under the **GNU Lesser General Public License 2.1** (`third_party/tinycc/COPYING`;
+see also `RELICENSING`). Only the files needed for the 32-bit x86 compiler are included, unmodified,
+together with its own `stddef.h`, `stdarg.h`, `stdbool.h` and `tccdefs.h`. `src/tcc_core.c`
+builds it, and the headers in `third_party/tinycc/shim` and `src/cclib.c` are a small C library
+written for CamadamOS so TinyCC can run without an operating system underneath. Because the whole
+source code is published here, you can change TinyCC and rebuild CamadamOS with your version, as
+the LGPL requires. TinyCC's own runtime library (`libtcc1`) is not used: `sdk/cc/runtime.c` and
+`sdk/cc/console.c`, which are added to the programs it compiles, were written for CamadamOS
+and are public domain (CC0), so programs you compile are entirely yours.
+
+**MP3** - `third_party/media/minimp3.h` is **minimp3** by Lieff (https://github.com/lieff/minimp3),
+released under CC0 (public domain); see `LICENSE.minimp3`.
+
+**OGG Vorbis** - `third_party/media/stb_vorbis.c` is **stb_vorbis** by Sean Barrett
+(https://github.com/nothings/stb), available under the MIT license or as public domain
+(the choice is at the end of the file). The small headers in `third_party/media/shim` were
+written for CamadamOS. The MIDI player in `src/media.c` was written for CamadamOS.
